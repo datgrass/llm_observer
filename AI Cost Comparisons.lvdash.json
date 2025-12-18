@@ -1,0 +1,945 @@
+{
+  "datasets": [
+    {
+      "name": "e15c92e9",
+      "displayName": "model_testing_results",
+      "queryLines": [
+        "SELECT * FROM llm_observer.default.model_testing_results"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "39af4bd8",
+      "displayName": "Consumption Overview",
+      "layout": [
+        {
+          "widget": {
+            "name": "dataset-size",
+            "queries": [
+              {
+                "name": "dashboards/01f0d6d2d5c9185ca6e839b323cdbaa2/datasets/01f0d6d2d5c91daba3a291dabcd0a93e_executed_by",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "executed_by",
+                      "expression": "`executed_by`"
+                    },
+                    {
+                      "name": "executed_by_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "executed_by",
+                    "queryName": "dashboards/01f0d6d2d5c9185ca6e839b323cdbaa2/datasets/01f0d6d2d5c91daba3a291dabcd0a93e_executed_by"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Executed By"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "a201a8ee",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "sum(total_dbu_cost)",
+                      "expression": "SUM(`total_dbu_cost`)"
+                    },
+                    {
+                      "name": "endpoint_name",
+                      "expression": "`endpoint_name`"
+                    },
+                    {
+                      "name": "sum(input_token_count)",
+                      "expression": "SUM(`input_token_count`)"
+                    },
+                    {
+                      "name": "sum(output_token_count)",
+                      "expression": "SUM(`output_token_count`)"
+                    },
+                    {
+                      "name": "sum(total_tokens)",
+                      "expression": "SUM(`total_tokens`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "sum(total_dbu_cost)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "USD",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  },
+                  "displayName": "Total $DBUs"
+                },
+                "color": {
+                  "fieldName": "endpoint_name",
+                  "displayName": "Model Name",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": []
+                  }
+                },
+                "label": {
+                  "show": true,
+                  "text": {
+                    "fieldName": "sum(total_dbu_cost)",
+                    "format": {
+                      "type": "number-currency",
+                      "currencyCode": "USD",
+                      "abbreviation": "compact",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 2
+                      }
+                    },
+                    "displayName": "Total $DBUs"
+                  }
+                },
+                "extra": [
+                  {
+                    "fieldName": "sum(input_token_count)",
+                    "displayName": "Input Tokens"
+                  },
+                  {
+                    "fieldName": "sum(output_token_count)",
+                    "displayName": "Output Tokens"
+                  },
+                  {
+                    "fieldName": "sum(total_tokens)",
+                    "displayName": "Total Tokens"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 3,
+            "width": 2,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "977b0b23",
+            "queries": [
+              {
+                "name": "dashboards/01f0d50851b11754a6f4aed4108c6945/datasets/01f0d5085b791719aa21fdf96cef3ae9_minutely(run_start_time)",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "minutely(run_start_time)",
+                      "expression": "DATE_TRUNC(\"MINUTE\", `run_start_time`)"
+                    },
+                    {
+                      "name": "minutely(run_start_time)_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "minutely(run_start_time)",
+                    "queryName": "dashboards/01f0d50851b11754a6f4aed4108c6945/datasets/01f0d5085b791719aa21fdf96cef3ae9_minutely(run_start_time)"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Run Times"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "c59c2a45",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "sum(total_dbus)",
+                      "expression": "SUM(`total_dbus`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_dbus)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total DBUs"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "15551f92",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "sum(total_dbu_cost)",
+                      "expression": "SUM(`total_dbu_cost`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_dbu_cost)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "USD",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total $DBUS"
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "d3481590",
+            "queries": [
+              {
+                "name": "dashboards/01f0d50851b11754a6f4aed4108c6945/datasets/01f0d5085b791719aa21fdf96cef3ae9_endpoint_name",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "endpoint_name",
+                      "expression": "`endpoint_name`"
+                    },
+                    {
+                      "name": "endpoint_name_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "endpoint_name",
+                    "queryName": "dashboards/01f0d50851b11754a6f4aed4108c6945/datasets/01f0d5085b791719aa21fdf96cef3ae9_endpoint_name"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Endpoint Name"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "cdd09f39",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "endpoint_name",
+                      "expression": "`endpoint_name`"
+                    },
+                    {
+                      "name": "n_rows",
+                      "expression": "`n_rows`"
+                    },
+                    {
+                      "name": "avg(total_duration_minutes)",
+                      "expression": "AVG(`total_duration_minutes`)"
+                    }
+                  ],
+                  "cubeGroupingSets": {
+                    "sets": [
+                      {
+                        "fieldNames": [
+                          "endpoint_name"
+                        ]
+                      },
+                      {
+                        "fieldNames": [
+                          "n_rows"
+                        ]
+                      }
+                    ]
+                  },
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "`endpoint_name`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`n_rows`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "pivot",
+              "encodings": {
+                "rows": [
+                  {
+                    "fieldName": "endpoint_name",
+                    "displayName": "Model Name"
+                  }
+                ],
+                "columns": [
+                  {
+                    "fieldName": "n_rows",
+                    "displayName": "Row Count"
+                  }
+                ],
+                "cell": {
+                  "type": "multi-cell",
+                  "fields": [
+                    {
+                      "fieldName": "avg(total_duration_minutes)",
+                      "cellType": "text",
+                      "displayName": "Model Runtime (Minutes)"
+                    }
+                  ]
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Model Runtime by Dataset Size"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 11,
+            "width": 4,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "ac0e2986",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "avg(total_duration_minutes)",
+                      "expression": "AVG(`total_duration_minutes`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(total_duration_minutes)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Average Run Time (Minutes)"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 11,
+            "width": 2,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "dc725dfa",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "endpoint_name",
+                      "expression": "`endpoint_name`"
+                    },
+                    {
+                      "name": "sum(input_dbu_cost)",
+                      "expression": "SUM(`input_dbu_cost`)"
+                    },
+                    {
+                      "name": "sum(output_dbu_cost)",
+                      "expression": "SUM(`output_dbu_cost`)"
+                    },
+                    {
+                      "name": "sum(total_dbu_cost)",
+                      "expression": "SUM(`total_dbu_cost`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "combo",
+              "encodings": {
+                "x": {
+                  "fieldName": "endpoint_name",
+                  "displayName": "Model Name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                },
+                "y": {
+                  "primary": {
+                    "fields": [
+                      {
+                        "fieldName": "sum(input_dbu_cost)",
+                        "displayName": "Input $DBUs"
+                      },
+                      {
+                        "fieldName": "sum(output_dbu_cost)",
+                        "displayName": "Output $DBUs"
+                      },
+                      {
+                        "fieldName": "sum(total_dbu_cost)",
+                        "displayName": "Total $DBUs"
+                      }
+                    ]
+                  },
+                  "secondary": {
+                    "fields": []
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "axis": {
+                    "title": "$DBUs"
+                  },
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "USD",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "showDescription": false,
+                "title": "$DBU Generation by Model"
+              },
+              "mark": {
+                "layout": "group"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 4,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "dbf1ad55",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "sum(input_token_count)",
+                      "expression": "SUM(`input_token_count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(input_token_count)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    },
+                    "significantFigures": {
+                      "type": "exact",
+                      "figures": 3
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total Input Tokens"
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 15,
+            "width": 1,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "e9bd4051",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "sum(output_token_count)",
+                      "expression": "SUM(`output_token_count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(output_token_count)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    },
+                    "significantFigures": {
+                      "type": "exact",
+                      "figures": 3
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total Output Tokens"
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 19,
+            "width": 1,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "58f9249c",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "endpoint_name",
+                      "expression": "`endpoint_name`"
+                    },
+                    {
+                      "name": "sum(input_token_count)",
+                      "expression": "SUM(`input_token_count`)"
+                    },
+                    {
+                      "name": "sum(output_token_count)",
+                      "expression": "SUM(`output_token_count`)"
+                    },
+                    {
+                      "name": "sum(total_tokens)",
+                      "expression": "SUM(`total_tokens`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "combo",
+              "encodings": {
+                "x": {
+                  "fieldName": "endpoint_name",
+                  "displayName": "Model Name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                },
+                "y": {
+                  "primary": {
+                    "fields": [
+                      {
+                        "fieldName": "sum(input_token_count)",
+                        "displayName": "Input Tokens"
+                      },
+                      {
+                        "fieldName": "sum(output_token_count)",
+                        "displayName": "Output Tokens"
+                      },
+                      {
+                        "fieldName": "sum(total_tokens)",
+                        "displayName": "Total Tokens"
+                      }
+                    ]
+                  },
+                  "secondary": {
+                    "fields": []
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "axis": {
+                    "title": "Token Count"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "showDescription": false,
+                "title": "Token Use by Model"
+              },
+              "mark": {
+                "layout": "group"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 15,
+            "width": 5,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "2eeb4533",
+            "queries": [
+              {
+                "name": "dashboards/01f0d6d2d5c9185ca6e839b323cdbaa2/datasets/01f0d6d2d5c91daba3a291dabcd0a93e_n_rows",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "n_rows",
+                      "expression": "`n_rows`"
+                    },
+                    {
+                      "name": "n_rows_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "n_rows",
+                    "queryName": "dashboards/01f0d6d2d5c9185ca6e839b323cdbaa2/datasets/01f0d6d2d5c91daba3a291dabcd0a93e_n_rows"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Row Count"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "4098f247",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "sum(total_tokens)",
+                      "expression": "SUM(`total_tokens`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_tokens)"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total Tokens"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "endpoint-usage",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e15c92e9",
+                  "fields": [
+                    {
+                      "name": "endpoint_name",
+                      "expression": "`endpoint_name`"
+                    },
+                    {
+                      "name": "minutely(request_time)",
+                      "expression": "DATE_TRUNC(\"MINUTE\", `request_time`)"
+                    },
+                    {
+                      "name": "count(*)",
+                      "expression": "COUNT(`*`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "minutely(request_time)",
+                  "displayName": "Request Time",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "count(*)",
+                  "displayName": "Count of Requests",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "endpoint_name",
+                  "displayName": "Model Name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": false
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Endpoint Usage"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 23,
+            "width": 6,
+            "height": 8
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "f15296b6",
+      "displayName": "Global Filters",
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}

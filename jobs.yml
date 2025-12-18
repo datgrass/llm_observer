@@ -1,0 +1,43 @@
+resources:
+  jobs:
+    run_llm_test:
+      name: run_llm_test
+      queue:
+        enabled: true
+      tasks:
+        - task_key: 00_llm_oss
+          notebook_task:
+            notebook_path: ./artifacts/00_llm_oss.ipynb
+            base_parameters:
+              catalog: "llm_observer"
+              schema: "default"
+              
+        - task_key: 00_llm_proprietary
+          notebook_task:
+            notebook_path: ./artifacts/00_llm_proprietary.ipynb
+            base_parameters:
+              catalog: "llm_observer"
+              schema: "default"
+
+        - task_key: 01_llm_cost_mapping
+          depends_on:
+            - task_key: 00_llm_oss
+            - task_key: 00_llm_proprietary
+          notebook_task:
+            notebook_path: ./artifacts/01_llm_cost_mapping.ipynb
+            base_parameters:
+              catalog: "llm_observer"
+              schema: "default"
+              mapping_model_endpoint: "databricks-meta-llama-3-3-70b-instruct"
+
+        - task_key: 02_llm_performance_test
+          depends_on:
+            - task_key: 01_llm_cost_mapping
+          notebook_task:
+            notebook_path: ./artifacts/02_llm_performance_test.ipynb
+            base_parameters:
+              model_endpoints: "databricks-claude-sonnet-4-5, databricks-claude-opus-4-5, databricks-claude-opus-4-1"
+              sample_dataset_sizes: "100,250,500,750,1000"
+              catalog: "llm_observer"
+              schema: "default"
+              time_zone: "America/Detroit"
