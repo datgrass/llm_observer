@@ -37,7 +37,7 @@ resources:
             notebook_path: ./artifacts/02_llm_performance_test.ipynb
             base_parameters:
               model_endpoints: "databricks-claude-sonnet-4-5, databricks-claude-opus-4-5, databricks-claude-opus-4-1"
-              sample_dataset_sizes: "100,250,500,750,1000"
+              sample_dataset_sizes: "100,250,500"
               catalog: "llm_observer"
               schema: "default"
-              time_zone: "America/Detroit"
+              time_zone: "Etc/UTC"
